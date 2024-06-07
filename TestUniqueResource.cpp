@@ -28,7 +28,7 @@ void StdDemo()
     if (!f)
         return;
 
-    fseek(f.Get(), 0, SEEK_END);
+    fseek((FILE *)f, 0, SEEK_END);
     const auto fileSize = ftell(f.Get());
 
     // better use MakeUniqueResource<T>() to get exception-safety.

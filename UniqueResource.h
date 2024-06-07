@@ -51,6 +51,11 @@ template <typename ResourceTrait, typename ResourceType> class UniqueResource
         return resource_;
     }
 
+    explicit operator ResourceType() const noexcept
+    {
+        return resource_;
+    }
+
     bool IsDefaultValue() const noexcept
     {
         return resource_ == DefaultValue();
@@ -66,6 +71,7 @@ template <typename ResourceTrait, typename ResourceType> class UniqueResource
     {
         return resource_ != DefaultValue();
     }
+
     bool operator!() const noexcept
     {
         return resource_ == DefaultValue();
