@@ -23,7 +23,7 @@
 
 void StdDemo()
 {
-    StdFileHandle f = MakeUniqueResource<StdFileHandle>(fopen(R"(c:\windows\system32\drivers\etc\hosts)", "rt"));
+    StdFileHandle f = MakeUniqueResource<StdFileHandle>(fopen(R"(c:\windows\system32\drivers\etc\hosts)", "rb"));
     assert((bool)f);
     if (!f)
         return;
