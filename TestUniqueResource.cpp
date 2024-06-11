@@ -52,7 +52,7 @@ void Win32Demo()
 
         typedef LONG(WINAPI * fnRtlGetVersion)(PRTL_OSVERSIONINFOW lpVersionInformation);
         fnRtlGetVersion pRtlGetVersion = (fnRtlGetVersion)GetProcAddress(ntdll.Get(), "RtlGetVersion");
-        assert(static_cast<bool>(pRtlGetVersion));
+        assert(pRtlGetVersion != nullptr);
     }
 
     {
