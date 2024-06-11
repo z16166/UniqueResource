@@ -24,7 +24,7 @@
 void StdDemo()
 {
     StdFileHandle f = MakeUniqueResource<StdFileHandle>(fopen(R"(c:\windows\system32\drivers\etc\hosts)", "rb"));
-    assert((bool)f);
+    assert(static_cast<bool>(f));
     if (!f)
         return;
 
@@ -33,7 +33,7 @@ void StdDemo()
 
     // better use MakeUniqueResource<T>() to get exception-safety.
     ByteArray buffer{new (std::nothrow) unsigned char[fileSize]};
-    assert((bool)buffer);
+    assert(static_cast<bool>(buffer));
     if (!buffer)
         return;
 
@@ -46,19 +46,19 @@ void Win32Demo()
 #ifdef _WIN32
     {
         DllHandle ntdll = MakeUniqueResource<DllHandle>(LoadLibrary(L"ntdll.dll"));
-        assert((bool)ntdll);
+        assert(static_cast<bool>(ntdll));
         if (!ntdll)
             return;
 
         typedef LONG(WINAPI * fnRtlGetVersion)(PRTL_OSVERSIONINFOW lpVersionInformation);
         fnRtlGetVersion pRtlGetVersion = (fnRtlGetVersion)GetProcAddress(ntdll.Get(), "RtlGetVersion");
-        assert(!pRtlGetVersion);
+        assert(static_cast<bool>(pRtlGetVersion));
     }
 
     {
         WIN32_FIND_DATA findData;
         FindHandle findHandle = MakeUniqueResource<FindHandle>(FindFirstFile(LR"(c:\program files\*)", &findData));
-        assert((bool)findHandle);
+        assert(static_cast<bool>(findHandle));
         if (!findHandle)
             return;
 
